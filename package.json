@@ -1,0 +1,31 @@
+{
+  "name": "enso",
+  "version": "1.0.0",
+  "description": "enso interactive album",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test",
+    "sass": "node-sass -w scss/ -o css/ --recursive",
+    "dev": "parcel index.html",
+    "build": "parcel build index.html",
+    "start": "npm run sass & npm run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrewnicholl/enso.git"
+  },
+  "author": "Andrew Nicholl",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andrewnicholl/enso/issues"
+  },
+  "homepage": "https://github.com/andrewnicholl/enso#readme",
+  "dependencies": {
+    "gsap": "^3.5.1",
+    "node-sass": "^4.14.1",
+    "three": "^0.120.1"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  }
+}
