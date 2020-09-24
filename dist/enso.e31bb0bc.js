@@ -50558,9 +50558,9 @@ var mouse = new THREE.Vector2(); // var geometry = new THREE.SphereGeometry(1, 5
 var geometry = new THREE.BoxGeometry(1, 1, 1);
 var material = new THREE.MeshLambertMaterial({
   color: 0xffcc00
-});
-var mesh = new THREE.Mesh(geometry, material);
-scene.add(mesh);
+}); // var mesh = new THREE.Mesh(geometry, material);
+// scene.add(mesh);
+
 var light = new THREE.PointLight(0xffffff, 1, 500);
 light.position.set(10, 0, 25);
 scene.add(light);
@@ -50578,30 +50578,27 @@ function onMouseMove(event) {
   var intersects = raycaster.intersectObjects(scene.children, true);
 
   for (var i = 0; i < intersects.length; i++) {
-    intersects[i].object.material.color.set(0xff0000);
+    var tl = new _all.TimelineMax();
+    tl.to(intersects[i].object.scale, 1, {
+      x: 2,
+      ease: _all.Expo.easeOut
+    });
+    tl.to(intersects[i].object.scale, 0.5, {
+      x: 0.5,
+      ease: _all.Expo.easeOut
+    });
+    tl.to(intersects[i].object.position, 0.5, {
+      x: 2,
+      ease: _all.Expo.easeOut
+    });
+    tl.to(mesh.rotation, 0.5, {
+      y: Math.PI * 0.5,
+      ease: _all.Expo.easeOut
+    }, "=-1.5");
   }
 }
 
 render();
-var tl = new _all.TimelineMax({
-  paused: true
-});
-tl.to(mesh.scale, 1, {
-  x: 2,
-  ease: _all.Expo.easeOut
-});
-tl.to(mesh.scale, 0.5, {
-  x: 0.5,
-  ease: _all.Expo.easeOut
-});
-tl.to(mesh.position, 0.5, {
-  x: 2,
-  ease: _all.Expo.easeOut
-});
-tl.to(mesh.rotation, 0.5, {
-  y: Math.PI * 0.5,
-  ease: _all.Expo.easeOut
-}, "=-1.5");
 window.addEventListener("mousemove", onMouseMove);
 },{"three":"node_modules/three/build/three.module.js","gsap/all":"node_modules/gsap/all.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];

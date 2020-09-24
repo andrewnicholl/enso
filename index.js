@@ -28,9 +28,17 @@ var mouse = new THREE.Vector2();
 // var geometry = new THREE.SphereGeometry(1, 50, 50);
 var geometry = new THREE.BoxGeometry(1, 1, 1);
 var material = new THREE.MeshLambertMaterial({ color: 0xffcc00 });
-var mesh = new THREE.Mesh(geometry, material);
+// var mesh = new THREE.Mesh(geometry, material);
 
-scene.add(mesh);
+// scene.add(mesh);
+
+meshX = -10;
+for (var i = 0; i < 15; i++) {
+  var mesh = new THREE.Mesh(geometry, material);
+  mesh.position.x = (Math.random() - 0.05) * 10;
+  mesh.position.y = (Math.random() - 0.05) * 10;
+  mesh.position.z = (Math.random() - 0.05) * 10;
+}
 
 var light = new THREE.PointLight(0xffffff, 1, 500);
 light.position.set(10, 0, 25);
@@ -52,16 +60,19 @@ function onMouseMove(event) {
 
   var intersects = raycaster.intersectObjects(scene.children, true);
   for (var i = 0; i < intersects.length; i++) {
-    intersects[i].object.material.color.set(0xff0000);
+    var tl = new TimelineMax();
+    tl.to(intersects[i].object.scale, 1, { x: 2, ease: Expo.easeOut });
+    tl.to(intersects[i].object.scale, 0.5, { x: 0.5, ease: Expo.easeOut });
+    tl.to(intersects[i].object.position, 0.5, { x: 2, ease: Expo.easeOut });
+    tl.to(
+      mesh.rotation,
+      0.5,
+      { y: Math.PI * 0.5, ease: Expo.easeOut },
+      "=-1.5"
+    );
   }
 }
 
 render();
-
-var tl = new TimelineMax({ paused: true });
-tl.to(mesh.scale, 1, { x: 2, ease: Expo.easeOut });
-tl.to(mesh.scale, 0.5, { x: 0.5, ease: Expo.easeOut });
-tl.to(mesh.position, 0.5, { x: 2, ease: Expo.easeOut });
-tl.to(mesh.rotation, 0.5, { y: Math.PI * 0.5, ease: Expo.easeOut }, "=-1.5");
 
 window.addEventListener("mousemove", onMouseMove);
