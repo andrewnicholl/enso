@@ -6,6 +6,7 @@ import {
 import {
   OrbitControls
 } from 'three/examples/jsm/controls/OrbitControls'
+
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(
   75,
@@ -18,7 +19,7 @@ camera.position.z = 5;
 var renderer = new THREE.WebGLRenderer({
   antialias: true
 });
-renderer.setClearColor("#E5E5E5");
+renderer.setClearColor("#CDCDDF");
 renderer.setSize(window.innerWidth, window.innerHeight);
 
 document.body.appendChild(renderer.domElement);
@@ -33,9 +34,9 @@ var raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2();
 
 // Sphere
-var geometry = new THREE.SphereGeometry(2, 4, 32);
+var geometry = new THREE.SphereGeometry(2, 50, 50);
 var material = new THREE.MeshLambertMaterial({
-  color: 0xf7f7f7
+  color: 0xCDCDDF
 });
 var mesh = new THREE.Mesh(geometry, material);
 
@@ -48,7 +49,7 @@ controls.update();
 
 // Light Source
 var light = new THREE.PointLight(0xffffff, 1, 1000);
-light.position.set(-10, 20, 30);
+light.position.set(-10, 20, 60);
 scene.add(light);
 
 
@@ -58,24 +59,4 @@ var render = function () {
   renderer.render(scene, camera);
 };
 
-function onMouseMove(event) {
-  event.preventDefault();
-
-  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-  raycaster.setFromCamera(mouse, camera);
-
-  var intersects = raycaster.intersectObjects(scene.children, true);
-  for (var i = 0; i < intersects.length; i++) {
-    var tl = new TimelineMax();
-    tl.to(intersects[i].object.position, 0.5, {
-      x: 2,
-      ease: Expo.easeOut
-    });
-  }
-}
-
 render();
-
-window.addEventListener("mousemove", onMouseMove);
