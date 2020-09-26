@@ -3,6 +3,10 @@ import {
   TimelineMax,
   Expo
 } from "gsap/all";
+import {
+  OrbitControls
+} from 'three/examples/jsm/controls/OrbitControls'
+
 
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(
@@ -30,7 +34,8 @@ window.addEventListener("resize", () => {
 var raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2();
 
-var geometry = new THREE.SphereGeometry(2, 32, 32);
+// Sphere
+var geometry = new THREE.SphereGeometry(2, 4, 32);
 var material = new THREE.MeshLambertMaterial({
   color: 0xf7f7f7
 });
@@ -38,6 +43,12 @@ var mesh = new THREE.Mesh(geometry, material);
 
 scene.add(mesh);
 
+// Orbit Controls
+// var controls = new THREE.OrbitControls(camera, renderer.domElement);
+// controls.update();
+
+
+// Light Source
 var light = new THREE.PointLight(0xffffff, 1, 1000);
 light.position.set(-10, 20, 30);
 scene.add(light);
@@ -45,7 +56,7 @@ scene.add(light);
 
 var render = function () {
   requestAnimationFrame(render);
-
+  // controls.update();
   renderer.render(scene, camera);
 };
 
@@ -60,26 +71,10 @@ function onMouseMove(event) {
   var intersects = raycaster.intersectObjects(scene.children, true);
   for (var i = 0; i < intersects.length; i++) {
     var tl = new TimelineMax();
-    tl.to(intersects[i].object.scale, 1, {
-      x: 2,
-      ease: Expo.easeOut
-    });
-    tl.to(intersects[i].object.scale, 0.5, {
-      x: 0.5,
-      ease: Expo.easeOut
-    });
     tl.to(intersects[i].object.position, 0.5, {
       x: 2,
       ease: Expo.easeOut
     });
-    tl.to(
-      mesh.rotation,
-      0.5, {
-        y: Math.PI * 0.5,
-        ease: Expo.easeOut
-      },
-      "=-1.5"
-    );
   }
 }
 
