@@ -51396,17 +51396,17 @@ var material = new THREE.MeshLambertMaterial({
 });
 var mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh); // Orbit Controls
-// var controls = new THREE.OrbitControls(camera, renderer.domElement);
-// controls.update();
-// Light Source
+
+var controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.update(); // Light Source
 
 var light = new THREE.PointLight(0xffffff, 1, 1000);
 light.position.set(-10, 20, 30);
 scene.add(light);
 
 var render = function render() {
-  requestAnimationFrame(render); // controls.update();
-
+  requestAnimationFrame(render);
+  controls.update();
   renderer.render(scene, camera);
 };
 

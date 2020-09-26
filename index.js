@@ -44,8 +44,8 @@ var mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
 
 // Orbit Controls
-// var controls = new THREE.OrbitControls(camera, renderer.domElement);
-// controls.update();
+var controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.update();
 
 
 // Light Source
@@ -56,7 +56,7 @@ scene.add(light);
 
 var render = function () {
   requestAnimationFrame(render);
-  // controls.update();
+  controls.update();
   renderer.render(scene, camera);
 };
 
