@@ -1,5 +1,8 @@
 const THREE = require("three");
-import { TimelineMax, Expo } from "gsap/all";
+import {
+  TimelineMax,
+  Expo
+} from "gsap/all";
 
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(
@@ -10,7 +13,9 @@ var camera = new THREE.PerspectiveCamera(
 );
 camera.position.z = 5;
 
-var renderer = new THREE.WebGLRenderer({ antialias: true });
+var renderer = new THREE.WebGLRenderer({
+  antialias: true
+});
 renderer.setClearColor("#E5E5E5");
 renderer.setSize(window.innerWidth, window.innerHeight);
 
@@ -25,24 +30,18 @@ window.addEventListener("resize", () => {
 var raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2();
 
-// var geometry = new THREE.SphereGeometry(1, 50, 50);
-var geometry = new THREE.BoxGeometry(1, 1, 1);
-var material = new THREE.MeshLambertMaterial({ color: 0xffcc00 });
-// var mesh = new THREE.Mesh(geometry, material);
+var geometry = new THREE.SphereGeometry(2, 32, 32);
+var material = new THREE.MeshLambertMaterial({
+  color: 0xf7f7f7
+});
+var mesh = new THREE.Mesh(geometry, material);
 
-// scene.add(mesh);
+scene.add(mesh);
 
-meshX = -10;
-for (var i = 0; i < 15; i++) {
-  var mesh = new THREE.Mesh(geometry, material);
-  mesh.position.x = (Math.random() - 0.05) * 10;
-  mesh.position.y = (Math.random() - 0.05) * 10;
-  mesh.position.z = (Math.random() - 0.05) * 10;
-}
-
-var light = new THREE.PointLight(0xffffff, 1, 500);
-light.position.set(10, 0, 25);
+var light = new THREE.PointLight(0xffffff, 1, 1000);
+light.position.set(-10, 20, 30);
 scene.add(light);
+
 
 var render = function () {
   requestAnimationFrame(render);
@@ -61,13 +60,24 @@ function onMouseMove(event) {
   var intersects = raycaster.intersectObjects(scene.children, true);
   for (var i = 0; i < intersects.length; i++) {
     var tl = new TimelineMax();
-    tl.to(intersects[i].object.scale, 1, { x: 2, ease: Expo.easeOut });
-    tl.to(intersects[i].object.scale, 0.5, { x: 0.5, ease: Expo.easeOut });
-    tl.to(intersects[i].object.position, 0.5, { x: 2, ease: Expo.easeOut });
+    tl.to(intersects[i].object.scale, 1, {
+      x: 2,
+      ease: Expo.easeOut
+    });
+    tl.to(intersects[i].object.scale, 0.5, {
+      x: 0.5,
+      ease: Expo.easeOut
+    });
+    tl.to(intersects[i].object.position, 0.5, {
+      x: 2,
+      ease: Expo.easeOut
+    });
     tl.to(
       mesh.rotation,
-      0.5,
-      { y: Math.PI * 0.5, ease: Expo.easeOut },
+      0.5, {
+        y: Math.PI * 0.5,
+        ease: Expo.easeOut
+      },
       "=-1.5"
     );
   }

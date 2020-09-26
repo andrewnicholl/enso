@@ -4,3 +4,7 @@ body {
 
 canvas {
   display: block; }
+
+h1 {
+  position: absolute;
+  font-family: sans-serif; }

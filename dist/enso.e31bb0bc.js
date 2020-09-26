@@ -50553,16 +50553,15 @@ window.addEventListener("resize", function () {
   camera.updateProjectionMatrix();
 });
 var raycaster = new THREE.Raycaster();
-var mouse = new THREE.Vector2(); // var geometry = new THREE.SphereGeometry(1, 50, 50);
-
-var geometry = new THREE.BoxGeometry(1, 1, 1);
+var mouse = new THREE.Vector2();
+var geometry = new THREE.SphereGeometry(2, 32, 32);
 var material = new THREE.MeshLambertMaterial({
-  color: 0xffcc00
-}); // var mesh = new THREE.Mesh(geometry, material);
-// scene.add(mesh);
-
-var light = new THREE.PointLight(0xffffff, 1, 500);
-light.position.set(10, 0, 25);
+  color: 0xf7f7f7
+});
+var mesh = new THREE.Mesh(geometry, material);
+scene.add(mesh);
+var light = new THREE.PointLight(0xffffff, 1, 1000);
+light.position.set(-10, 20, 30);
 scene.add(light);
 
 var render = function render() {
@@ -50628,7 +50627,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56540" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51811" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
