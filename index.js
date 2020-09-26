@@ -6,8 +6,6 @@ import {
 import {
   OrbitControls
 } from 'three/examples/jsm/controls/OrbitControls'
-
-
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(
   75,
@@ -44,7 +42,7 @@ var mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
 
 // Orbit Controls
-var controls = new THREE.OrbitControls(camera, renderer.domElement);
+var controls = new OrbitControls(camera, renderer.domElement);
 controls.update();
 
 

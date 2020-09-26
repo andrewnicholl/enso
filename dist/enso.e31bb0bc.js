@@ -51397,7 +51397,7 @@ var material = new THREE.MeshLambertMaterial({
 var mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh); // Orbit Controls
 
-var controls = new THREE.OrbitControls(camera, renderer.domElement);
+var controls = new _OrbitControls.OrbitControls(camera, renderer.domElement);
 controls.update(); // Light Source
 
 var light = new THREE.PointLight(0xffffff, 1, 1000);
